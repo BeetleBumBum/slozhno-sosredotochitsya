@@ -113,7 +113,7 @@ a:focus {
   border-block-end: none;
   inset-inline-end: 20px;
   inset-block-start: 20px;
-  }
+}
   
 .decorated-zone::after {
   content: '';
@@ -133,7 +133,7 @@ a:focus {
   z-index: -1;
   inset-inline-end: 48px;
   inset-block-start: 20px;
-  }
+}
   
 .decorative-text::before {
   content: "rec";
@@ -142,7 +142,7 @@ a:focus {
   font-size: var(--main-font-size);
   line-height: 1.4em;
   text-transform: uppercase;
-  }
+}
 
 .decorative-text::after {
   content: '';
@@ -155,7 +155,7 @@ a:focus {
   border-radius: 50%;
   box-shadow: 0 0 4px 2px var(--accent-color);
   background-color: var(--accent-color);
-  }
+}
 
 @media (width <= 768px) {
     .header__theme-menu {
@@ -166,7 +166,7 @@ a:focus {
     .header__theme-menu-list {
       flex-direction: column;
     }
-  }
+}
   
 @media (width <= 375px) {
     .header {
@@ -197,7 +197,7 @@ a:focus {
       inset-inline-end: 38px;
       inset-block-start: 10px;
     }
-  }
+}
 
 /* Секция content */
 
@@ -299,7 +299,7 @@ a:focus {
   } 
 }
 
-  /* Секция gallery */
+/* Секция gallery */
 
 .gallery {
   display: block;
