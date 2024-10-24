@@ -284,7 +284,7 @@ a:focus {
 @media (width <= 375px) {
   .content {
     padding: 40px var(--padding-small);
-    }
+  }
 
   .section:not(:last-child) {
     margin-block-end: 50px;
