@@ -1,6 +1,7 @@
 /* Основные стили проекта. Это стили для темы, которую вы верстаете первой. */
 
 .page {
+  min-width: 375px;
   max-width: 1024px;
   /* сохраните в разметке и стилях класс page. На его основе работает скрипт. */
   font-family: var(--main-font-family), sans-serif;
@@ -79,13 +80,13 @@ a:focus {
   font-weight: 700;
   font-size: clamp(7.5rem, 0.5625rem + 14.4531vi, 9.8125rem);
   line-height: 0.83em;
-  text-shadow: 4px 4px 0 var(--accent-color);
+  text-shadow: 4px 4px 0 var(--decor-color);
 }
 
 .title-decor {
-  color: var(--accent-text-color);
+  color: var(--accent-subtitle-color);
   font-size: var(--main-font-size);
-  background-color: var(--accent-color);
+  background-color: var(--decor-color);
 }
 
 .header__text {
@@ -104,6 +105,7 @@ a:focus {
 .decorated-zone::before {
   content: '';
   position: absolute;
+  z-index: -1;
   width: 25px;
   height: 25px;
   border: 1px solid var(--accent-color);
@@ -116,6 +118,7 @@ a:focus {
 .decorated-zone::after {
   content: '';
   position: absolute;
+  z-index: -1;
   width: 25px;
   height: 25px;
   border: 1px solid var(--accent-color);
@@ -127,9 +130,11 @@ a:focus {
   
 .decorative-text {
   position: absolute;
+  z-index: -1;
   inset-inline-end: 48px;
   inset-block-start: 20px;
   }
+  
 .decorative-text::before {
   content: "rec";
   color: var(--accent-color);
@@ -142,6 +147,7 @@ a:focus {
 .decorative-text::after {
   content: '';
   position: absolute;
+  z-index: -1;
   width: 9px;
   height: 9px;
   margin-inline-start: 10px;
@@ -253,7 +259,7 @@ a:focus {
 
 .link {
   text-decoration: none;
-  text-shadow: 2px 1px 0 var(--accent-color);
+  text-shadow: 2px 1px 0 var(--decor-color);
 }
 
 .link:hover {
@@ -377,7 +383,7 @@ a:focus {
   font-weight: 700;
   font-size: clamp(7.5rem, 0.5625rem + 14.4531vi, 9.8125rem);
   line-height: 0.83em;
-  text-shadow: 2px 2px 0 var(--accent-color);
+  text-shadow: 2px 2px 0 var(--decor-color);
 }
 
 @media (width <= 375px) {
