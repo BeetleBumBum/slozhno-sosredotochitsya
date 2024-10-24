@@ -61,7 +61,7 @@ a:focus {
 
 .header__theme-menu-button:focus-visible::after {
   content: '';
-  position: absolute; 
+  position: absolute;
   background-color: var(--accent-color);
   inline-size: calc(100%);
   block-size: 0.1ch;
@@ -233,9 +233,6 @@ a:focus {
   color: var(--accent-color);
   font-weight: 700;
   font-size: var(--main-font-size);
-}
-
-.section__title {
   width: 19rem;
 }
 
@@ -302,7 +299,7 @@ a:focus {
   } 
 }
 
-/* Секция gallery */
+  /* Секция gallery */
 
 .gallery {
   display: block;
