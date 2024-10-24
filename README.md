@@ -1,0 +1,1 @@
+https://github.com/BeetleBumBum/slozhno-sosredotochitsya.git
