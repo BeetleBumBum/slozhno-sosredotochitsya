@@ -39,7 +39,7 @@
     --padding-small: 10px; 
   }
 
-  .page.theme_auto .decorative-text {
+  .page:not(.theme_dark) .decorative-text {
     display: none;
   }
 }

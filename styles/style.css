@@ -1,8 +1,6 @@
 /* Основные стили проекта. Это стили для темы, которую вы верстаете первой. */
 
 .page {
-  min-width: 375px;
-  max-width: 1024px;
   /* сохраните в разметке и стилях класс page. На его основе работает скрипт. */
   font-family: var(--main-font-family), sans-serif;
   background-color: var(--bg-color);
@@ -18,9 +16,15 @@
   display: grid;
   grid-template-rows: 1fr min-content 1fr;
   grid-auto-flow: row;
-  height: 100vb;
-  min-height: 768px;
   padding: var(--padding-big);
+  block-size: 100vh;
+  min-block-size: 768px;
+}
+
+@supports (block-size: 100vb) {
+  .header {
+    block-size: 100vb;
+  }
 }
 
 .header__theme-menu {
@@ -43,6 +47,7 @@
   text-align: center;
   text-transform: lowercase;
   background-color: transparent;
+  cursor: pointer;
 }
 
 button:focus,
@@ -52,21 +57,10 @@ a:focus {
 
 .header__theme-menu-button:hover {
   outline: 1px solid var(--hover-button-color);
-  cursor: pointer;
 }
 
 .header__theme-menu-button:focus-visible {
-  position: relative;
-}
-
-.header__theme-menu-button:focus-visible::after {
-  content: '';
-  position: absolute;
-  background-color: var(--accent-color);
-  inline-size: calc(100%);
-  block-size: 0.1ch;
-  inset-block-start: 1.3em;
-  inset-inline-start: 0;
+  border-bottom: 1px solid var(--accent-color);
 }
 
 .header__theme-menu-button_active {
@@ -92,10 +86,10 @@ a:focus {
 .header__text {
   justify-self: end;
   align-self: center;
-  width: clamp(22.75rem, -1.0625rem + 49.6094vi, 30.6875rem);
   font-weight: 700;
   font-size: var(--main-font-size);
   line-height: 1.3em;
+  inline-size: clamp(22.75rem, -1.0625rem + 49.6094vi, 30.6875rem);
 }
 
 .decorated-zone {
@@ -106,11 +100,11 @@ a:focus {
   content: '';
   position: absolute;
   z-index: -1;
-  width: 25px;
-  height: 25px;
   border: 1px solid var(--accent-color);
   border-inline-start: none;
   border-block-end: none;
+  inline-size: 25px;
+  block-size: 25px;
   inset-inline-end: 20px;
   inset-block-start: 20px;
 }
@@ -119,11 +113,11 @@ a:focus {
   content: '';
   position: absolute;
   z-index: -1;
-  width: 25px;
-  height: 25px;
   border: 1px solid var(--accent-color);
   border-inline-end: none;
   border-block-start: none;
+  inline-size: 25px;
+  block-size: 25px;
   inset-inline-start: 20px;
   inset-block-end: 20px;
 }
@@ -148,13 +142,20 @@ a:focus {
   content: '';
   position: absolute;
   z-index: -1;
-  width: 9px;
-  height: 9px;
   margin-inline-start: 10px;
   margin-block-start: 8px;
   border-radius: 50%;
   box-shadow: 0 0 4px 2px var(--accent-color);
   background-color: var(--accent-color);
+  inline-size: 9px;
+  block-size: 9px;
+}
+
+@media(width > 1024px) {
+  .header {
+    margin: auto;
+    inline-size: 80%;
+  }
 }
 
 @media (width <= 768px) {
@@ -170,8 +171,8 @@ a:focus {
   
 @media (width <= 375px) {
     .header {
-      min-height: 668px;
       padding: var(--padding-small);
+      min-block-size: 668px;
     }
   
     .header__title {
@@ -180,7 +181,7 @@ a:focus {
     }
   
     .header__text {
-      width: 100%;
+      inline-size: 100%;
     }
   
     .decorated-zone::before {
@@ -202,38 +203,41 @@ a:focus {
 /* Секция content */
 
 .content {
-  padding: 60px var(--padding-big);
+  padding: 60px var(--padding-big) 49px;
 }
 
-.section:not(:last-child) {
+.section {
   margin-block-end: 80px;
 }
   
-.section:not(:nth-child(2)) {
+.section:not(.section__change-direction) {
   display: grid;
   grid-template-columns: 1fr minmax(min-content, 648.92px);
   gap: 20px;
 }
 
-.section__article-row {
+.section__article {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.section__article-column {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 21px;
+.section__article.change-direction {
+  flex-direction: row;
   margin-block-start: 21px;
 }
 
+.change-direction article {
+  flex-grow: 1;
+  flex-basis: 0;
+}
 
 .section__title {
   color: var(--accent-color);
   font-weight: 700;
   font-size: var(--main-font-size);
-  width: 19rem;
+  line-height: 1.3em;
+  inline-size: 17em;
 }
 
 .section__subtitle {
@@ -267,35 +271,40 @@ a:focus {
   outline: 1px solid var(--text-color);
 }
 
+@media (width <= 1000px) {
+  .section__article.change-direction {
+    flex-direction: column;
+  }
+}
+
 @media (width <= 768px) {
   .section__title {
-    width: 14.75rem;
-  }
+    inline-size: 13.1em;
+  }  
+}
 
-  .section__article-column {
+@media (width <= 650px) {
+  .section:not(.section__change-direction) {
     display: flex;
+  }
+  
+  .section:not(.section__change-direction),
+  .section__article.change-direction {
     flex-direction: column;
   }
 }
 
 @media (width <= 375px) {
   .content {
-    padding: 40px var(--padding-small);
+    padding: 40px var(--padding-small) 36px;
   }
 
-  .section:not(:last-child) {
+  .section {
     margin-block-end: 50px;
   }
 
-  .section:not(:nth-child(2)),
-  .section__article-row,
-  .section__article-column {
-    display: flex;
-    flex-direction: column;
-  }
-
   .section__title {
-    width: 100%;
+    inline-size: 100%;
   } 
 }
 
@@ -303,17 +312,17 @@ a:focus {
 
 .gallery {
   display: block;
-  padding: var(--padding-big);
-  padding-block-end: 60px;
 }
 
 .gallery__heading {
   margin-block-end: var(--padding-big);
 }
 
-.picture {
-  width: 100%;
-  height: 100%;
+img {
+  object-fit: cover;
+  object-position: center;
+  inline-size: 100%;
+  block-size: 100%;
 }
 
 .pictures {
@@ -327,7 +336,6 @@ a:focus {
 
 .ice-cream {
   grid-area: 1 / 3 / 3 / 4;
-  object-fit: cover;
 }
 
 .books {
@@ -336,19 +344,13 @@ a:focus {
 
 .tape {
   grid-area: 2 / 1 / 4 / 2;
-  object-fit: cover;
 }
 
 .street {
   grid-area: 3 / 2 / 4 / 4;
 }
 
-@media (width <= 375px) {
-  .gallery {
-    padding: var(--padding-small);
-    padding-block-end: 38px;
-  }
-
+@media (width <= 530px) {
   .gallery__heading {
     margin-block-end: 11px;
   }
@@ -357,7 +359,7 @@ a:focus {
     display: block;
   }
 
-  .picture:not(:last-child) {
+  .pictures li:not(:last-child) {
     margin-block-end: 6px;
   }
 }
@@ -369,9 +371,15 @@ a:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vb;
-  min-height: 768px;
   padding: var(--padding-big);
+  block-size: 100vh;
+  min-block-size: 768px;
+}
+
+@supports (block-size: 100vb) {
+  .footer {
+    block-size: 100vb;
+  }
 }
 
 .footer__title {
@@ -385,8 +393,8 @@ a:focus {
 
 @media (width <= 375px) {
   .footer {
-    min-height: 668px;
     padding: var(--padding-small);
+    min-block-size: 668px;
   }
 
   .footer__title {
